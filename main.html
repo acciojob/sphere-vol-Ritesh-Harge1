@@ -1,20 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Sphere Volume Calculator</title>
-  <script src="script.js"></script>
+  <title>Volume of a Sphere</title>
+  <script>
+    function volume_sphere() {
+      const radius = parseFloat(document.getElementById("radius").value);
+      let volume = NaN;
+
+      // validate input
+      if (!isNaN(radius) && radius >= 0) {
+        volume = (4 / 3) * Math.PI * Math.pow(radius, 3);
+        volume = volume.toFixed(4); // round to 4 decimals
+      }
+
+      document.getElementById("volume").value = volume;
+      return false; // prevent form submission
+    }
+  </script>
 </head>
 <body>
-  <h2>Volume of a Sphere</h2>
-  <form onsubmit="event.preventDefault(); volume_sphere();">
+  <h2>Calculate the Volume of a Sphere</h2>
+  <form onsubmit="return volume_sphere()">
     <label for="radius">Radius:</label>
-    <input type="text" id="radius" name="radius">
+    <input type="number" id="radius" name="radius" step="any">
     <br><br>
     <label for="volume">Volume:</label>
     <input type="text" id="volume" name="volume" readonly>
     <br><br>
-    <input type="submit" value="Calculate">
+    <!-- Cypress expects this button id -->
+    <input type="submit" id="submit" value="Calculate">
   </form>
 </body>
 </html>
